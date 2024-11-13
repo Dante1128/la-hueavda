@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo Galáctico de Desarrollo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+/* Galáctico y futurista */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: url('https://www.wallpaperflare.com/static/228/275/153/space-nasa-galaxy-universe-wallpaper.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #00ff99;
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
+    letter-spacing: 2px;
+}
+
+#team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+.team-member {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    width: 250px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    box-shadow: 0 4px 30px rgba(0, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.team-member:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+}
+
+.team-member img {
+    width: 150px; /* Ajusta según el tamaño deseado */
+    height: 150px; /* Ajusta según el tamaño deseado */
+    object-fit: cover; /* Asegura que la imagen se ajuste sin deformarse */
+    border-radius: 50%; /* Hace que las imágenes sean circulares */
+}
+
+
+.team-member h2 {
+    margin-top: 15px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #00ff99;
+    text-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
+}
+
+.team-member p {
+    color: #ccc;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #333;
+    padding: 40px;
+    border-radius: 12px;
+    width: 350px;
+    color: #fff;
+    text-align: left;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.close {
+    float: right;
+    font-size: 30px;
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #00ff99;
+}
+
+
+</style>
+<body>
+    <header>
+        <h1>¡Los Scripts!</h1>
+    </header>
+    <section id="team">
+        <!-- Each team member's information -->
+        <div class="team-member" onclick="showDetails('lawyer1')">
+            <img src="/fotos sistemas operativos/max.jpg" alt="Abogado 1">
+            <h2>Max Harold Carvajal Limachi</h2>
+            <p>Rol: Abogado</p>
+        </div>
+        <div class="team-member" onclick="showDetails('lawyer2')">
+            <img src="/fotos sistemas operativos/angel.jpg" alt="Abogado 2">
+            <h2>Jose Angel Mamani Pinto</h2>
+            <p>Rol: Abogado</p>
+        </div>
+        <div class="team-member" onclick="showDetails('secretary')">
+            <img src="/fotos sistemas operativos/mario.jpg" alt="Secretario">
+            <h2>Adiel Mario Apaza Callisaya</h2>
+            <p>Rol: Secretario</p>
+        </div>
+        <div class="team-member" onclick="showDetails('manager')">
+            <img src="/fotos sistemas operativos/thais.jpg" alt="Gerente">
+            <h2>Thais Daniela Flores Gutierrez</h2>
+            <p>Rol: Gerente</p>
+        </div>
+        <div class="team-member" onclick="showDetails('marketing')">
+            <img src="/fotos sistemas operativos/yerain.jpg" alt="Marketing">
+            <h2>Yerain Nahuel Cuestas Cayo</h2>
+            <p>Rol: Marketing</p>
+        </div>
+        <div class="team-member" onclick="showDetails('developer1')">
+            <img src="/fotos sistemas operativos/me.jpg" alt="Desarrollador 1">
+            <h2>Dante Andree Yupanqui Rodriguez</h2>
+            <p>Rol: Desarrollador</p>
+        </div>
+        <div class="team-member" onclick="showDetails('developer2')">
+            <img src="/fotos sistemas operativos/wara.jpg" alt="Desarrollador 2">
+            <h2>Wara Nicol Chumia Apaza</h2>
+            <p>Rol: Desarrollador</p>
+        </div>
+    </section>
+
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="member-name"></h2>
+            <p id="member-role"></p>
+            <p id="member-bio"></p>
+        </div>
+    </div>
+
+    <script src="script.js">
+        function showDetails(memberId) {
+    const teamData = {
+        'lawyer1': {
+            name: "Abogado 1",
+            role: "Abogado",
+            bio: "Especialista en derecho corporativo con experiencia en videojuegos y propiedad intelectual."
+        },
+        'lawyer2': {
+            name: "Abogado 2",
+            role: "Abogado",
+            bio: "Especializado en regulaciones de la industria del entretenimiento y licencias internacionales."
+        },
+        'secretary': {
+            name: "Secretario",
+            role: "Secretario",
+            bio: "Encargado de la organización interna y coordinación de eventos galácticos."
+        },
+        'manager': {
+            name: "Gerente",
+            role: "Gerente",
+            bio: "Lidera el desarrollo de nuevos universos y la gestión del equipo galáctico."
+        },
+        'marketing': {
+            name: "Marketing",
+            role: "Marketing",
+            bio: "Estratégico en la promoción de aventuras intergalácticas y campañas de marketing en redes cósmicas."
+        },
+        'developer1': {
+            name: "Desarrollador 1",
+            role: "Desarrollador",
+            bio: "Desarrollador de software con experiencia en motores gráficos y mundos virtuales."
+        },
+        'developer2': {
+            name: "Desarrollador 2",
+            role: "Desarrollador",
+            bio: "Especialista en desarrollo de backend para plataformas de juegos y realidad virtual."
+        }
+    };
+
+    const member = teamData[memberId];
+    document.getElementById("member-name").innerText = member.name;
+    document.getElementById("member-role").innerText = member.role;
+    document.getElementById("member-bio").innerText = member.bio;
+
+    document.getElementById("details-modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("details-modal").style.display = "none";
+}
+
+    </script>
+</body>
+</html>
